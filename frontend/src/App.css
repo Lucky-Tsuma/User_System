@@ -16,7 +16,7 @@
   margin-bottom: 15px;
 }
 
-.loginButton {
+.loginButton, .signupButton {
   border-radius: 5px;
   background-color: aquamarine;
   width: 100px;
