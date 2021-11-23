@@ -1,7 +1,7 @@
 import '../App.css';
 import { registerUser } from '../redux/actions/user_actions';
-import { useSelector, useDispatch } from 'react-redux';
-import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 import { Link } from "react-router-dom";
 
 const Signup = () => {
@@ -35,7 +35,7 @@ const Signup = () => {
             <input className = "textArea" type = "password" placeholder = "Password" value={password} onChange = {onPasswordChange}/>
             <input className = "textArea" type = "password" placeholder = "Confirm Password" />
             <button className = "signupButton" onClick = {() => dispatch(registerUser(email, firstname, lastname, password))}>Sign up</button>
-            <Link to = "/login">
+            <Link to = "/">
                 <p>Login</p>
             </Link>
             <input className = "responseArea" type = "text" placeholder = "Response..." />

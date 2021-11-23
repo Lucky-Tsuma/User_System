@@ -7,17 +7,15 @@ const userReducer = (state = initialState, {type, payload}) => {
     switch(type) {
         case REGISTER:
             axios.post('http://localhost:3001/usersystem/auth/register', payload)
-            .then([...state, Response.data])
+            .then(response => { return [...state, response.data]})
             .catch();
-            console.log(state);
-            return state;
+            break;
 
         case LOGIN:
             axios.post('http://localhost:3001/usersystem/auth/login', payload)
-            .then([...state, Response.data])
+            .then(response => { return [...state, response.data]})
             .catch();
-            console.log(state);
-            return state;
+            break;
 
         default:
             return state;

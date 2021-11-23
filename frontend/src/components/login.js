@@ -1,6 +1,6 @@
 import '../App.css';
-import { useSelector, useDispatch } from 'react-redux';
-import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 import { login } from '../redux/actions/user_actions';
 import { Link } from "react-router-dom";
 
