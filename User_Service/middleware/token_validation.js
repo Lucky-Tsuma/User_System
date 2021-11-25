@@ -10,7 +10,7 @@ module.exports = {
             token = token.slice(7);
             verify(token, process.env.SECRET_KEY, (err, decoded) => {
                 if(err) {
-                    res.json({
+                    return res.json({
                         success: 0,
                         message: "Invalid token"
                     });
@@ -19,7 +19,7 @@ module.exports = {
                 }
             })
         } else {
-            res.json({
+            return res.json({
                 success: 0,
                 message: "Access Denied!"
             });

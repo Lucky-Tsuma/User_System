@@ -1,5 +1,5 @@
 const mssql = require('mssql');
-const { ms_sql_config } = require("../../config/database");
+const { ms_sql_config } = require("../config/database");
 
 module.exports = {
 
@@ -9,9 +9,9 @@ module.exports = {
         try {
             const pool = await mssql.connect(ms_sql_config);
             const result = await pool.request().query(sql);
-            result === null ? res.status(201).send("No users available") : res.status(201).send(result);
+            result === null ? res.status(201).json({ success: 0, message: "No users available" }) : res.status(201).json({ success: 1, message: result });
         } catch(error) {
-            res.status(500).send(error);
+            return res.status(500).json({ success: 0, message: error });
         }
         
     },
@@ -22,9 +22,9 @@ module.exports = {
         try {
             const pool = await mssql.connect(ms_sql_config);
             const result = await pool.request().query(sql);
-            result === null ? res.status(201).send("User not available") : res.status(201).send(result.recordset[0]);
+            return result === null ? res.status(401).send({ success: 0, message: "User not available" }) : res.status(201).json({ success: 1, message:  result.recordset[0] });
         } catch(error) {
-            res.status(500).send(error);
+            return res.status(500).send({ success: 0, message: error });
         } 
     },
     deleteUser: async (req, res) => {
@@ -36,13 +36,13 @@ module.exports = {
             const pool = await mssql.connect(ms_sql_config);
             result = await pool.request().query(sql1);
             if(result.recordset[0] == null) {
-                res.status(201).send("User does not exist");
+                return res.status(401).json({ success: 0, message: "User does not exist" });
             } else {
                 result = await pool.request().query(sql);
-                res.status(201).send("User deleted successfully");
+                return res.status(201).json( { success: 1, message: "User deleted successfully" });
             }
         } catch(error) {
-            res.status(500).send(error);
+            return res.status(500).json({ success: 0, message: error });
         }
     }
 }

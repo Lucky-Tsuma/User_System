@@ -1,5 +1,5 @@
 const mssql = require('mssql');
-const { ms_sql_config } = require("../../config/database");
+const { ms_sql_config } = require("../config/database");
 
 module.exports = {
 
